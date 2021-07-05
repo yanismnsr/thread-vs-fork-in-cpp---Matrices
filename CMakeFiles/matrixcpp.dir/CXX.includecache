@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
+vector
+-
+iostream
+-
+
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/Matrix.cpp
+../include/matrixcpp/Matrix.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
+vector
+-
+thread
+-
+
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/main.cpp
+../include/matrixcpp/Matrix.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
+vector
+-
+iostream
+-
+

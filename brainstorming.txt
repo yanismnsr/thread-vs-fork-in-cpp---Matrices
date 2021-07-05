@@ -1,0 +1,12 @@
+I want to write a matrix library
+First, I wanted to compare fork and threads performances in matrix multiplications
+
+I need a matrix class
+    * A vector of vectors vector<vector<float>>
+    * A multiplication function that uses threads
+    * A multiplication function that uses fork
+
+
+Expected result : threads are quicker than fork
+
+Fork duplicates all the process while thread does not

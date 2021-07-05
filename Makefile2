@@ -1,0 +1,20 @@
+CC=g++
+CFLAGS=-Wall -g
+LDFLAGS=
+EXEC=matrixcpp
+
+all : $(EXEC)
+
+matrixcpp: obj/main.o obj/Matrix.o
+    $(CC) -o $@ $^ $(CFLAGS)
+
+%.o: %.cpp
+    $(CC) -o $@ -c $^ $(CFLAGS)
+
+clean : 
+    rm obj/*.o
+
+mrproper: clean
+    rm $(EXEC)
+
+# Not finished
