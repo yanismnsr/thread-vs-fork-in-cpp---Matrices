@@ -6,25 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
+/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp/Matrix.h
 vector
 -
 iostream
 -
 
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/Matrix.cpp
+/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/src/Matrix.cpp
 ../include/matrixcpp/Matrix.h
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
+/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp/Matrix.h
 vector
 -
 thread
 -
-
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/main.cpp
-../include/matrixcpp/Matrix.h
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
-vector
+sys/wait.h
 -
-iostream
+sys/mman.h
+-
+unistd.h
+-
+string.h
 -
 

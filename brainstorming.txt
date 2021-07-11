@@ -10,3 +10,13 @@ I need a matrix class
 Expected result : threads are quicker than fork
 
 Fork duplicates all the process while thread does not
+
+
+RAII (Resource acquisition is initialization): 
+    . How do I supposed to implement this ? 
+        => In the constructor, declare a shared memory space with mmap, in which I'll
+            put the matrix data (vector of vectors). Actually, all the vectors must be 
+            in a shared memory space. 
+        => In the destructor, I'll free all the ressources (unmap the shared memory space)
+    
+    

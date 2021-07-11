@@ -12,9 +12,11 @@
 using namespace std;
 
 void matrixTest() {
-    int line1 [] = {-1, 4, 5};
-    int line2 [] = {7, 9, 2};
-    int line3 [] = {2, 7, 4};
+    float line1 [] = {-1, 4, 5};
+    float line2 [] = {7, 9, 2};
+    float line3 [] = {2, 7, 4};
+
+    float *matrix [3] = {line1, line2, line3};
 
     vector<float> vectLine1(line1, line1 + 3);
     vector<float> vectLine2(line2, line2 + 3);
@@ -25,12 +27,12 @@ void matrixTest() {
     matrixVect.push_back(vectLine2);
     matrixVect.push_back(vectLine3);
 
-    Matrix mat (matrixVect);
+    Matrix mat1 (3, 3, matrix, false);
+    mat1.Display();
 
-    
-    cout << "multiplying ..." << endl;
+    Matrix::MultiplyWithThreads(mat1, mat1);
 
-    Matrix::MultiplyWithThreads(mat, mat);
+    Matrix::MultiplyWithForks(mat1, mat1);
 
 }
 
