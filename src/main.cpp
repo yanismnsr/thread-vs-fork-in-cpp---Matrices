@@ -28,7 +28,6 @@ void matrixTest() {
     matrixVect.push_back(vectLine3);
 
     Matrix mat1 (3, 3, matrix, false);
-    mat1.Display();
 
     Matrix::MultiplyWithThreads(mat1, mat1);
 

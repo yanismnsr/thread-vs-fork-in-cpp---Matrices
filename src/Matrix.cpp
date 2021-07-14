@@ -31,7 +31,8 @@ Matrix::Matrix(uint lines, uint columns) : nbProcesses(0)
 Matrix::Matrix(uint lines, uint columns, bool shared) {
     _shared = shared;
     if (shared) {
-        // Creating the shared memory space for the container of lines (table of tables)
+        // Creating the shared memory space for the container of 
+        // lines (table of tables)
         _elementsMatrix = (float**)mmap(
             NULL, 
             sizeof(float*) * lines,
@@ -72,7 +73,8 @@ Matrix::Matrix(uint lines, uint columns, bool shared) {
 Matrix::Matrix (uint lines, uint columns, float ** matrix, bool shared) {
     _shared = shared;
     if (shared) {
-        // Creating the shared memory space for the container of lines (table of tables)
+        // Creating the shared memory space for the container of 
+        // lines (table of tables)
         _elementsMatrix = (float**)mmap(
             NULL, 
             sizeof(float*) * lines,
@@ -171,7 +173,7 @@ void Matrix::lineTimesColumnPointers(
     float sum = 0;
     for (uint i = 0; i < mat2Columns; ++i)
     {
-        sum += mat1->_elementsMatrix[line][i] * mat2->_elementsMatrix[i][column];
+        sum += mat1->_elementsMatrix[line][i]*mat2->_elementsMatrix[i][column];
     }
     solutionMatrix->nbProcesses ++;
     solutionMatrix->_elementsMatrix[line][column] = sum;
@@ -211,9 +213,16 @@ Matrix Matrix::MultiplyWithThreads(
         }
     }
 
+    // TODO wait for threads best practice in c++
     for (int i = 0; i < mat1Lines * mat2Columns; ++i)
     {
         threadTable[i]->join();
+    }
+
+    // Deleting the allocated memory for threads
+    for (int i = 0; i < mat1Lines * mat2Columns; ++i)
+    {
+        delete threadTable[i];
     }
 
     cout << solutionMatrix << endl;
@@ -279,27 +288,16 @@ void Matrix::MultiplyWithForks(
                     i,
                     j
                 );
-                break;
+                exit(0);
             }
-        }
-        if (pid == 0) {
-            break;
         }
     }
 
     if (pid != 0) {
         while (wait(NULL) > 0); 
         cout << *sharedSolutionMatrix;
-        cout << "number of processed : " << sharedSolutionMatrix->nbProcesses << endl;
+        cout << "number of processed : " << 
+            sharedSolutionMatrix->nbProcesses << endl;
     }
 
-}
-
-void Matrix::Display() {
-    for (int i = 0; i < this->_lines; ++i) {
-        for (int j = 0; j < this->_columns; ++j) {
-            cout << this->_elementsMatrix[i][j] << "\t";
-        } 
-        cout << endl;
-    }
 }

@@ -19,4 +19,11 @@ RAII (Resource acquisition is initialization):
             in a shared memory space. 
         => In the destructor, I'll free all the ressources (unmap the shared memory space)
     
-    
+
+
+Treatment : 
+    Use a lambda expression to treat the result of the multiplication (catches the reference to a result)
+    Create a worker class which makes all the process of    
+        Generating the matrixes
+        Calculating the result
+        Redirects the result into a file
