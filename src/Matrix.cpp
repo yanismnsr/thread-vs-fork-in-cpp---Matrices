@@ -149,8 +149,8 @@ void Matrix::lineTimesColumnPointers(
     const Matrix * mat1,
     const Matrix * mat2,
     uint line,
-    uint column)
-{
+    uint column
+){
     uint mat2Columns = mat2->GetNbColumns();
     uint mat1Lines = mat1->GetNbLines();
     float sum = 0;
@@ -198,6 +198,7 @@ void Matrix::MultiplyWithThreads(
     }
 
     // TODO wait for threads best practice in c++
+    // Condition variable vs semaphores
     for (int i = 0; i < mat1Lines * mat2Columns; ++i)
     {
         threadTable[i]->join();
@@ -265,7 +266,7 @@ void Matrix::MultiplyWithForks(
             pid = fork();
             if (pid == 0) {
                 lineTimesColumnPointers(
-                    sharedSolutionMatrix,
+                    solution,
                     &matrix1,
                     &matrix2,
                     i,

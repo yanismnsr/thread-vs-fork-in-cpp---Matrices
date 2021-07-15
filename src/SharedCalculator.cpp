@@ -24,8 +24,8 @@ SharedCalculator::SharedCalculator (uint solutionLines, uint solutionColumns) {
 
 }
 
-
-void SharedCalculator::process(void (*f)(Matrix *)) {
+template <typename F, typename P>
+void SharedCalculator::process(function<F(P)> f) {
     f(_sharedSpaceMatrix);
 }
 

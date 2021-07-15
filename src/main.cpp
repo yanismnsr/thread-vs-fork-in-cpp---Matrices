@@ -27,15 +27,25 @@ void matrixTest() {
 
 }
 
+template <class T> void printType(const T&) {
+    cout << __PRETTY_FUNCTION__ << endl;
+}
+
 int main(int argc, char *argv[]) {
 
     matrixTest();
  
     SharedCalculator sc = SharedCalculator(3, 3);
 
-    Matrix mat(3, 3);
+    Matrix mat1 (3, 3);
 
-    cout << mat;
+    auto lambda = [&mat1](Matrix * resultPtr) -> void {
+        Matrix::MultiplyWithThreads(mat1, mat1, resultPtr);
+    };
+
+    printType(lambda);
+
+    sc.process(lambda);
 
     // sc.process([](Matrix * resultPtr) {
     //     Matrix::MultiplyWithForks(mat1, mat1, NULL);
