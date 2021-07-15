@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp
+CMAKE_SOURCE_DIR = /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp
+CMAKE_BINARY_DIR = /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/CMakeFiles /mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/CMakeFiles /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -139,6 +139,21 @@ src/Matrix.s:
 .PHONY : src/Matrix.s
 
 # target to build an object file
+src/SharedCalculator.o:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/SharedCalculator.o
+.PHONY : src/SharedCalculator.o
+
+# target to preprocess a source file
+src/SharedCalculator.i:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/SharedCalculator.i
+.PHONY : src/SharedCalculator.i
+
+# target to generate assembly for a file
+src/SharedCalculator.s:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/SharedCalculator.s
+.PHONY : src/SharedCalculator.s
+
+# target to build an object file
 src/main.o:
 	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/main.o
 .PHONY : src/main.o
@@ -165,6 +180,9 @@ help:
 	@echo "... src/Matrix.o"
 	@echo "... src/Matrix.i"
 	@echo "... src/Matrix.s"
+	@echo "... src/SharedCalculator.o"
+	@echo "... src/SharedCalculator.i"
+	@echo "... src/SharedCalculator.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -4,6 +4,11 @@
 CMakeFiles/matrixcpp.dir/src/Matrix.o: include/matrixcpp/Matrix.h
 CMakeFiles/matrixcpp.dir/src/Matrix.o: src/Matrix.cpp
 
+CMakeFiles/matrixcpp.dir/src/SharedCalculator.o: include/matrixcpp/Matrix.h
+CMakeFiles/matrixcpp.dir/src/SharedCalculator.o: include/matrixcpp/SharedCalculator.h
+CMakeFiles/matrixcpp.dir/src/SharedCalculator.o: src/SharedCalculator.cpp
+
 CMakeFiles/matrixcpp.dir/src/main.o: include/matrixcpp/Matrix.h
+CMakeFiles/matrixcpp.dir/src/main.o: include/matrixcpp/SharedCalculator.h
 CMakeFiles/matrixcpp.dir/src/main.o: src/main.cpp
 

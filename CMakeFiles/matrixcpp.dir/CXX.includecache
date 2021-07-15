@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp/Matrix.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
 vector
 -
 iostream
 -
 
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/src/Matrix.cpp
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/Matrix.cpp
 ../include/matrixcpp/Matrix.h
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp/Matrix.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
 vector
 -
 thread
@@ -27,12 +27,6 @@ unistd.h
 -
 string.h
 -
-
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/src/main.cpp
-../include/matrixcpp/Matrix.h
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp/Matrix.h
-vector
--
-iostream
+cstdlib
 -
 

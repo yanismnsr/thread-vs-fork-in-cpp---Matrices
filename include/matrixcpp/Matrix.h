@@ -12,10 +12,6 @@ public :
 
     int nbProcesses;
 
-    Matrix(
-            const vector<vector<float>> &matrix
-            );
-
     Matrix(uint lines, uint columns);
 
     Matrix(uint lines, uint columns, bool shared);
@@ -32,15 +28,16 @@ public :
 
     void Display();
 
-    // TODO transform the parameters into pointers
-    static Matrix MultiplyWithThreads(
+    static void MultiplyWithThreads(
         const Matrix & matrix1, 
-        const Matrix & matrix2
+        const Matrix & matrix2,
+        Matrix * solution
     );
 
     static void MultiplyWithForks(
         const Matrix & matrix1,
-        const Matrix & matrix2
+        const Matrix & matrix2,
+        Matrix * solution
     );
 
     static void lineTimesColumnPointers(
@@ -56,21 +53,12 @@ public :
     static void Demo ();
 
 private :
-    vector <vector<float>> _matrix;
     unsigned int _lines;
     unsigned int _columns;
 
     bool _shared = false;
 
     float ** _elementsMatrix;
-
-    static void lineTimesColumn(
-        Matrix *solutionMatrix,
-        const Matrix mat1, 
-        const Matrix mat2, 
-        uint line, 
-        uint column
-    );
 
 };
 

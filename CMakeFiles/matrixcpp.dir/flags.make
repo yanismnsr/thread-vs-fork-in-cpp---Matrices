@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include -I/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp 
+CXX_INCLUDES = -I/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include -I/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp 
 

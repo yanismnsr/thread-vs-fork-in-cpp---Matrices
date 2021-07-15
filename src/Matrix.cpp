@@ -9,23 +9,23 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #include <string.h>
+#include <cstdlib>
 
 using namespace std;
 
-Matrix::Matrix(
-    const vector<vector<float>> &matrix) : _matrix(matrix) {}
-
 Matrix::Matrix(uint lines, uint columns) : nbProcesses(0)
 {
-    for (uint i = 0; i < lines; ++i)
-    {
-        vector<float> line;
-        for (uint j = 0; j < columns; ++j)
-        {
-            line.push_back(0);
+    _shared = false;
+    _elementsMatrix = new float* [lines];
+    for (int i = 0; i < lines; ++i) {
+        _elementsMatrix[i] = new float [columns];
+        for (int j = 0; j < columns; ++j) {
+            _elementsMatrix[i][j] = rand() % 20;
         }
-        this->_matrix.push_back(line);
     }
+
+    _lines = lines;
+    _columns = columns;
 }
 
 Matrix::Matrix(uint lines, uint columns, bool shared) {
@@ -60,7 +60,7 @@ Matrix::Matrix(uint lines, uint columns, bool shared) {
     } else {
         _elementsMatrix = new float*[lines];
         for (int i = 0; i < lines; ++i) {
-            _elementsMatrix[i] = {new float[columns]{}};
+            _elementsMatrix[i] = new float[columns];
         }
     }
 
@@ -101,7 +101,7 @@ Matrix::Matrix (uint lines, uint columns, float ** matrix, bool shared) {
     } else {
         _elementsMatrix = new float*[lines];
         for (int i = 0; i < lines; ++i) {
-            _elementsMatrix[i] = new float[columns]();
+            _elementsMatrix[i] = new float[columns];
             memcpy(_elementsMatrix[i], matrix[i], sizeof(float) * columns);
         }
     }
@@ -129,9 +129,9 @@ Matrix::~Matrix()
         );
     } else {
         for (int i = 0; i < _lines; ++i) {
-            delete _elementsMatrix[i];
+            delete[] _elementsMatrix[i];
         }
-        delete _elementsMatrix;
+        delete [] _elementsMatrix;
     }
 
 }
@@ -142,23 +142,6 @@ uint Matrix::GetNbLines() const {
 
 uint Matrix::GetNbColumns() const {
     return this->_columns;
-}
-
-void Matrix::lineTimesColumn(
-    Matrix *solutionMatrix,
-    const Matrix mat1,
-    const Matrix mat2,
-    uint line,
-    uint column)
-{
-    uint mat2Columns = mat2._matrix.size();
-    uint mat1Lines = mat1._matrix.at(0).size();
-    float sum = 0;
-    for (uint i = 0; i < mat2Columns; ++i)
-    {
-        sum += mat1._matrix[line][i] * mat2._matrix[i][column];
-    }
-    solutionMatrix->_matrix[line][column] = sum;
 }
 
 void Matrix::lineTimesColumnPointers(
@@ -179,10 +162,11 @@ void Matrix::lineTimesColumnPointers(
     solutionMatrix->_elementsMatrix[line][column] = sum;
 }
 
-Matrix Matrix::MultiplyWithThreads(
+void Matrix::MultiplyWithThreads(
     const Matrix & matrix1,
-    const Matrix & matrix2)
-{
+    const Matrix & matrix2,
+    Matrix * solution
+){
     uint mat1Lines = matrix1.GetNbLines();
     uint mat1Columns = matrix1.GetNbColumns();
     uint mat2Lines = matrix2.GetNbLines();
@@ -226,8 +210,6 @@ Matrix Matrix::MultiplyWithThreads(
     }
 
     cout << solutionMatrix << endl;
-
-    return solutionMatrix;
 }
 
 ostream &operator<<(ostream &out, const Matrix &matrix)
@@ -245,7 +227,8 @@ ostream &operator<<(ostream &out, const Matrix &matrix)
 
 void Matrix::MultiplyWithForks(
     const Matrix &matrix1,
-    const Matrix &matrix2
+    const Matrix &matrix2,
+    Matrix * solution
 ) {
     uint mat1Lines = matrix1._lines;
     uint mat1Columns = matrix1._columns;

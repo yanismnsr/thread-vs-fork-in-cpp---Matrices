@@ -11,7 +11,9 @@ find_package (Threads)
 
 add_executable(matrixcpp
         include/matrixcpp/Matrix.h
+        include/matrixcpp/SharedCalculator.h
         src/Matrix.cpp
+        src/SharedCalculator.cpp
         src/main.cpp)
         
 target_link_libraries (matrixcpp ${CMAKE_THREAD_LIBS_INIT})
