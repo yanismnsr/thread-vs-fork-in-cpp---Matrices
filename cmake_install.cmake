@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp
+# Install script for directory: /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

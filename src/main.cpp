@@ -9,6 +9,7 @@
 #include "../include/matrixcpp/SharedCalculator.h"
 #include <vector>
 #include <iostream>
+#include <functional>
 
 using namespace std;
 
@@ -43,9 +44,13 @@ int main(int argc, char *argv[]) {
         Matrix::MultiplyWithThreads(mat1, mat1, resultPtr);
     };
 
+    function <void (int)> func = [&mat1] (int i) {
+        cout << i << endl;
+    };
+
     printType(lambda);
 
-    sc.process(lambda);
+    sc.process(func);
 
     // sc.process([](Matrix * resultPtr) {
     //     Matrix::MultiplyWithForks(mat1, mat1, NULL);

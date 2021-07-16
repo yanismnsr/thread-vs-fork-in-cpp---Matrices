@@ -5,7 +5,6 @@
         "iostream": "cpp",
         "string_view": "cpp",
         "new": "cpp",
-        "thread": "cpp",
         "functional": "cpp",
         "random": "cpp"
     }

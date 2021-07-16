@@ -19,8 +19,7 @@ public :
     SharedCalculator (uint resultLines, uint resultColumns);
 
     // void process (void (*f)(Matrix *));
-    template <typename F, typename P>
-    void process (function<F(P)> f);
+    void process (function<void (int)> & f);
 
     ~SharedCalculator();
 

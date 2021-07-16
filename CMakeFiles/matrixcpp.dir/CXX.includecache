@@ -6,37 +6,29 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp/Matrix.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
 vector
 -
 iostream
 -
 
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp/SharedCalculator.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/SharedCalculator.h
 iostream
 -
 functional
 -
 Matrix.h
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp/Matrix.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
 
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/src/SharedCalculator.cpp
-../include/matrixcpp/SharedCalculator.h
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp/SharedCalculator.h
-iostream
--
-sys/mman.h
--
-new
--
-
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/src/main.cpp
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/main.cpp
 ../include/matrixcpp/Matrix.h
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp/Matrix.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
 ../include/matrixcpp/SharedCalculator.h
-/mnt/c/Users/YanisMANSOUR/Desktop/Personal/Projects/CPP/matrixcpp/include/matrixcpp/SharedCalculator.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/SharedCalculator.h
 vector
 -
 iostream
+-
+functional
 -
 
