@@ -1,1 +1,1 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/matrixcpp.dir/src/Matrix.o CMakeFiles/matrixcpp.dir/src/SharedCalculator.o CMakeFiles/matrixcpp.dir/src/Serializer.o CMakeFiles/matrixcpp.dir/src/main.o  -o matrixcpp  -lpthread 
+/usr/bin/c++ -g -rdynamic CMakeFiles/matrixcpp.dir/src/Matrix.o CMakeFiles/matrixcpp.dir/src/SharedCalculator.o CMakeFiles/matrixcpp.dir/src/Serializer.o CMakeFiles/matrixcpp.dir/src/main.o -o matrixcpp  -lpthread 
