@@ -4,11 +4,15 @@
 CMakeFiles/matrixcpp.dir/src/Matrix.o
  /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
  /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/Matrix.cpp
+CMakeFiles/matrixcpp.dir/src/Serializer.o
+ /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Serializer.h
+ /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/Serializer.cpp
 CMakeFiles/matrixcpp.dir/src/SharedCalculator.o
  /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
  /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/SharedCalculator.h
  /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/SharedCalculator.cpp
 CMakeFiles/matrixcpp.dir/src/main.o
  /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
+ /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Serializer.h
  /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/SharedCalculator.h
  /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/main.cpp

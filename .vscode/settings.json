@@ -6,6 +6,9 @@
         "string_view": "cpp",
         "new": "cpp",
         "functional": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "string": "cpp",
+        "atomic": "cpp",
+        "condition_variable": "cpp"
     }
 }

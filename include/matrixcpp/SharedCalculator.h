@@ -7,11 +7,6 @@
 
 using namespace std;
 
-enum SharingType {
-    THREAD,
-    FORK
-};
-
 class SharedCalculator {
 
 public :
@@ -19,7 +14,7 @@ public :
     SharedCalculator (uint resultLines, uint resultColumns);
 
     // void process (void (*f)(Matrix *));
-    void process (function<void (int)> & f);
+    void process (function<void (Matrix *)> & f);
 
     ~SharedCalculator();
 

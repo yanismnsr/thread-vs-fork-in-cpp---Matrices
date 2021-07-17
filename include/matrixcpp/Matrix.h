@@ -3,14 +3,15 @@
 
 #include <vector>
 #include <iostream>
+#include <atomic>
+#include <mutex>
+#include <condition_variable>
 
 using namespace std;
 
 class Matrix {
 
 public :
-
-    int nbProcesses;
 
     Matrix(uint lines, uint columns);
 
@@ -48,6 +49,15 @@ public :
         uint column
     );
 
+    static void lineTimesColumnThreads(
+        Matrix *solutionMatrix,
+        const Matrix * mat1,
+        const Matrix * mat2,
+        uint line,
+        uint column,
+        int threadNumber
+    );
+
     virtual ~Matrix();
 
     static void Demo ();
@@ -55,6 +65,10 @@ public :
 private :
     unsigned int _lines;
     unsigned int _columns;
+
+    atomic<int> _nbProcesses;
+    condition_variable cv;
+    mutex _mt;
 
     bool _shared = false;
 

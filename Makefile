@@ -139,6 +139,21 @@ src/Matrix.s:
 .PHONY : src/Matrix.s
 
 # target to build an object file
+src/Serializer.o:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Serializer.o
+.PHONY : src/Serializer.o
+
+# target to preprocess a source file
+src/Serializer.i:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Serializer.i
+.PHONY : src/Serializer.i
+
+# target to generate assembly for a file
+src/Serializer.s:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Serializer.s
+.PHONY : src/Serializer.s
+
+# target to build an object file
 src/SharedCalculator.o:
 	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/SharedCalculator.o
 .PHONY : src/SharedCalculator.o
@@ -180,6 +195,9 @@ help:
 	@echo "... src/Matrix.o"
 	@echo "... src/Matrix.i"
 	@echo "... src/Matrix.s"
+	@echo "... src/Serializer.o"
+	@echo "... src/Serializer.i"
+	@echo "... src/Serializer.s"
 	@echo "... src/SharedCalculator.o"
 	@echo "... src/SharedCalculator.i"
 	@echo "... src/SharedCalculator.s"

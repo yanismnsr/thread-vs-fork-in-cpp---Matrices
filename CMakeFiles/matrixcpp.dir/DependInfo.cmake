@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/Matrix.cpp" "/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/CMakeFiles/matrixcpp.dir/src/Matrix.o"
+  "/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/Serializer.cpp" "/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/CMakeFiles/matrixcpp.dir/src/Serializer.o"
   "/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/SharedCalculator.cpp" "/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/CMakeFiles/matrixcpp.dir/src/SharedCalculator.o"
   "/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/main.cpp" "/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/CMakeFiles/matrixcpp.dir/src/main.o"
   )

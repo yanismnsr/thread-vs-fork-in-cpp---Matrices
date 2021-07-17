@@ -10,17 +10,20 @@
 #include <unistd.h>
 #include <string.h>
 #include <cstdlib>
+#include <mutex>
+#include <condition_variable>
+#include <atomic>
 
 using namespace std;
 
-Matrix::Matrix(uint lines, uint columns) : nbProcesses(0)
+Matrix::Matrix(uint lines, uint columns)
 {
     _shared = false;
     _elementsMatrix = new float* [lines];
     for (int i = 0; i < lines; ++i) {
         _elementsMatrix[i] = new float [columns];
         for (int j = 0; j < columns; ++j) {
-            _elementsMatrix[i][j] = rand() % 20;
+            _elementsMatrix[i][j] = (rand() % 20) - 10;
         }
     }
 
@@ -158,8 +161,37 @@ void Matrix::lineTimesColumnPointers(
     {
         sum += mat1->_elementsMatrix[line][i]*mat2->_elementsMatrix[i][column];
     }
-    solutionMatrix->nbProcesses ++;
     solutionMatrix->_elementsMatrix[line][column] = sum;
+}
+
+void Matrix::lineTimesColumnThreads(
+    Matrix *solutionMatrix,
+    const Matrix * mat1,
+    const Matrix * mat2,
+    uint line,
+    uint column,
+    int threadNumber
+){
+
+    /* {
+        lock_guard<mutex> lk(solutionMatrix->_mt);
+        solutionMatrix->_nbProcesses ++;
+    } */
+
+    uint mat2Columns = mat2->GetNbColumns();
+    uint mat1Lines = mat1->GetNbLines();
+    float sum = 0;
+    for (uint i = 0; i < mat2Columns; ++i)
+    {
+        sum += mat1->_elementsMatrix[line][i]*mat2->_elementsMatrix[i][column];
+    }
+    solutionMatrix->_elementsMatrix[line][column] = sum;
+
+    {
+        lock_guard<mutex> lk(solutionMatrix->_mt);
+        solutionMatrix->_nbProcesses --;
+        solutionMatrix->cv.notify_all();
+    }
 }
 
 void Matrix::MultiplyWithThreads(
@@ -174,11 +206,11 @@ void Matrix::MultiplyWithThreads(
     if (mat1Columns != mat2Lines)
     {
         throw "Incompatible sizes";
-    } 
-
-    Matrix solutionMatrix(mat1Lines, mat2Columns, false);
+    }
 
     thread *threadTable[mat1Lines * mat2Columns];
+
+    solution->_nbProcesses = mat1Lines * mat2Columns;
 
     for (int i = 0; i < mat1Lines; ++i)
     {
@@ -186,22 +218,28 @@ void Matrix::MultiplyWithThreads(
         {
             int index = mat2Columns * i + j;
             thread *t = new thread(
-                &Matrix::lineTimesColumnPointers,
-                &solutionMatrix,
+                &Matrix::lineTimesColumnThreads,
+                solution,
                 &matrix1, 
                 &matrix2, 
                 i,
-                j
+                j,
+                mat2Columns * i + j
             );
             threadTable[index] = t;
         }
     }
 
-    // TODO wait for threads best practice in c++
-    // Condition variable vs semaphores
+    // Synchronization 
+    {
+        unique_lock<mutex> lk(solution->_mt);
+        solution->cv.wait(lk, [&solution]{ return solution->_nbProcesses == 0; });
+    }
+
+    // Detaching
     for (int i = 0; i < mat1Lines * mat2Columns; ++i)
     {
-        threadTable[i]->join();
+        threadTable[i]->detach();
     }
 
     // Deleting the allocated memory for threads
@@ -210,7 +248,6 @@ void Matrix::MultiplyWithThreads(
         delete threadTable[i];
     }
 
-    cout << solutionMatrix << endl;
 }
 
 ostream &operator<<(ostream &out, const Matrix &matrix)
@@ -251,15 +288,12 @@ void Matrix::MultiplyWithForks(
         0
     );
 
-    
     Matrix temp (
         mat2Lines,
         mat1Columns,
         true
     );
     memcpy(sharedSolutionMatrix, &temp, sizeof(Matrix));
-
-    sharedSolutionMatrix->nbProcesses = 0;
 
     for (int i = 0; i < mat1Lines; ++i) {
         for (int j = 0; j < mat2Columns; ++j) {
@@ -279,9 +313,6 @@ void Matrix::MultiplyWithForks(
 
     if (pid != 0) {
         while (wait(NULL) > 0); 
-        cout << *sharedSolutionMatrix;
-        cout << "number of processed : " << 
-            sharedSolutionMatrix->nbProcesses << endl;
     }
 
 }
