@@ -46,7 +46,9 @@ int main(int argc, char *argv[]) {
 
     time_t tic, tac;
 
-    Serializer threadFile("thread.txt");
+    /* ******************************************************************** */
+    // Threads before forks
+/*     Serializer threadFile("thread.txt");
 
     for (int i = 1; i <= 100; ++i) {
 
@@ -82,16 +84,79 @@ int main(int argc, char *argv[]) {
 
         sc.process(funcForks);
 
+    } */
+    /* ******************************************************************** */
+
+
+    /* ******************************************************************** */
+    // Forks before threads
+/*     Serializer forkFile ("fork.txt");
+    for (int i = 1; i <= 100; ++i) {
+
+        SharedCalculator sc (i, i);
+
+        Matrix mat(i, i);
+
+        function <void (Matrix*)> funcForks = [i, &mat, &forkFile] (Matrix* resultPtr) {
+            long int tic = getTime();
+            Matrix::MultiplyWithForks(mat, mat, resultPtr);
+            long int tac = getTime();
+            forkFile << i << ":" << tac - tic << endl;
+        };
+
+        sc.process(funcForks);
+
     }
 
+    Serializer threadFile("thread.txt");
+    for (int i = 1; i <= 100; ++i) {
 
-    // Matrix mat (150, 150);
-    // SharedCalculator sc(150, 150);
+        SharedCalculator sc (i, i);
+
+        Matrix mat(i, i);
+
+        function <void (Matrix*)> funcThreads = [i, &mat, &threadFile] (Matrix* resultPtr) {
+            long int tic = getTime();
+            Matrix::MultiplyWithThreads(mat, mat, resultPtr);
+            long int tac = getTime();
+            threadFile << i << ":" << tac - tic << endl;
+        };
+
+        sc.process(funcThreads);
+
+    } */
+    /* ******************************************************************** */
     
-    // function <void (Matrix*)> funcThreads = [&mat] (Matrix* resultPtr) {
-    //     Matrix::MultiplyWithThreads(mat, mat, resultPtr);
-    // };
+    /* ******************************************************************** */
+    // Same loop
+    Serializer threadFile("thread.txt");
+    Serializer forkFile ("fork.txt");
+    for (int i = 1; i <= 100; ++i) {
 
-    // sc.process(funcThreads);
+        SharedCalculator sc (i, i);
+
+        Matrix mat(i, i);
+
+        function <void (Matrix*)> funcThreads = [i, &mat, &threadFile] (Matrix* resultPtr) {
+            long int tic = getTime();
+            Matrix::MultiplyWithThreads(mat, mat, resultPtr);
+            long int tac = getTime();
+            threadFile << i << ":" << tac - tic << endl;
+        };
+
+        sc.process(funcThreads);
+
+        function <void (Matrix*)> funcForks = [i, &mat, &forkFile] (Matrix* resultPtr) {
+            long int tic = getTime();
+            Matrix::MultiplyWithForks(mat, mat, resultPtr);
+            long int tac = getTime();
+            forkFile << i << ":" << tac - tic << endl;
+        };
+
+        sc.process(funcForks);
+
+    }
+    /* ******************************************************************** */
+
 
 }

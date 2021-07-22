@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/yanis/Bureau/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/Matrix.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
 vector
 -
 iostream
@@ -18,7 +18,7 @@ mutex
 condition_variable
 -
 
-/home/yanis/Bureau/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/Serializer.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Serializer.h
 string
 -
 iostream
@@ -26,21 +26,21 @@ iostream
 fstream
 -
 
-/home/yanis/Bureau/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/SharedCalculator.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/SharedCalculator.h
 iostream
 -
 functional
 -
 Matrix.h
-/home/yanis/Bureau/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/Matrix.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
 
-/home/yanis/Bureau/Projets/thread-vs-fork-in-cpp---Matrices/src/main.cpp
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/main.cpp
 ../include/matrixcpp/Matrix.h
-/home/yanis/Bureau/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/Matrix.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
 ../include/matrixcpp/SharedCalculator.h
-/home/yanis/Bureau/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/SharedCalculator.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/SharedCalculator.h
 ../include/matrixcpp/Serializer.h
-/home/yanis/Bureau/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/Serializer.h
+/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Serializer.h
 vector
 -
 iostream

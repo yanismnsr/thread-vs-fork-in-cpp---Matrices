@@ -279,22 +279,6 @@ void Matrix::MultiplyWithForks(
         throw "Incompatible sizes";
     }
 
-    Matrix * sharedSolutionMatrix = (Matrix *)mmap(
-        NULL,
-        sizeof(Matrix),
-        PROT_READ | PROT_WRITE,
-        MAP_SHARED | MAP_ANONYMOUS,
-        -1,
-        0
-    );
-
-    Matrix temp (
-        mat2Lines,
-        mat1Columns,
-        true
-    );
-    memcpy(sharedSolutionMatrix, &temp, sizeof(Matrix));
-
     for (int i = 0; i < mat1Lines; ++i) {
         for (int j = 0; j < mat2Columns; ++j) {
             pid = fork();
