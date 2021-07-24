@@ -58,6 +58,12 @@ public :
         int threadNumber
     );
 
+    static void naiveMultiplication (
+        const Matrix & mat1, 
+        const Matrix & mat2,
+        Matrix* solution
+    );
+
     virtual ~Matrix();
 
     static void Demo ();

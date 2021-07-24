@@ -46,11 +46,30 @@ int main(int argc, char *argv[]) {
 
     time_t tic, tac;
 
+    /* Serializer simpleMultiplicationFile("simple.txt");
+
+    for (int i = 1; i <= 300; ++i) {
+
+        SharedCalculator sc (i, i);
+
+        Matrix mat(i, i);
+
+        function <void (Matrix*)> simpleFunc = [i, &mat, &simpleMultiplicationFile] (Matrix* resultPtr) {
+            long int tic = getTime();
+            Matrix::naiveMultiplication(mat, mat, resultPtr);
+            long int tac = getTime();
+            simpleMultiplicationFile << i << ":" << tac - tic << endl;
+        };
+
+        sc.process(simpleFunc);
+
+    } */
+
     /* ******************************************************************** */
     // Threads before forks
     Serializer threadFile("thread.txt");
 
-    for (int i = 1; i <= 100; ++i) {
+    for (int i = 1; i <= 300; ++i) {
 
         SharedCalculator sc (i, i);
 
@@ -67,7 +86,7 @@ int main(int argc, char *argv[]) {
 
     }
 
-    Serializer forkFile ("fork.txt");
+    /* Serializer forkFile ("fork.txt");
 
     for (int i = 1; i <= 100; ++i) {
 
@@ -84,7 +103,7 @@ int main(int argc, char *argv[]) {
 
         sc.process(funcForks);
 
-    } 
+    }  */
     /* ******************************************************************** */
 
 

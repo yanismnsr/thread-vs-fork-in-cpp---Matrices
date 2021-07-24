@@ -151,8 +151,8 @@ void Matrix::lineTimesColumnPointers(
     Matrix *solutionMatrix,
     const Matrix * mat1,
     const Matrix * mat2,
-    uint line,
-    uint column
+    const uint line,
+    const uint column
 ){
     uint mat2Columns = mat2->GetNbColumns();
     uint mat1Lines = mat1->GetNbLines();
@@ -263,6 +263,7 @@ ostream &operator<<(ostream &out, const Matrix &matrix)
     return out;
 }
 
+
 void Matrix::MultiplyWithForks(
     const Matrix &matrix1,
     const Matrix &matrix2,
@@ -299,4 +300,29 @@ void Matrix::MultiplyWithForks(
         while (wait(NULL) > 0); 
     }
 
+}
+
+void Matrix::naiveMultiplication (
+    const Matrix & mat1, 
+    const Matrix & mat2,
+    Matrix* solution
+) {
+    uint mat1Lines = mat1.GetNbLines();
+    uint mat1Columns = mat1.GetNbColumns();
+    uint mat2Lines = mat2.GetNbLines();
+    uint mat2Columns = mat2.GetNbColumns();
+
+    int operations = 0;
+
+    for (int i = 0; i < mat1Lines; ++i) {
+        for (int j = 0; j < mat2Columns; ++j) {
+            ++ operations;
+            solution->_elementsMatrix[i][j] = 0;
+            for (int k = 0; k < mat1Columns; ++k) {
+                solution->_elementsMatrix[i][j] += mat1._elementsMatrix[i][k] * mat1._elementsMatrix[k][j];
+            }
+        }
+    }
+
+    cout << "operations : " << operations << endl;
 }

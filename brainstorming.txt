@@ -27,3 +27,11 @@ Treatment :
         Generating the matrixes
         Calculating the result
         Redirects the result into a file
+
+
+
+Check how many processes are running :
+    ps -eo nlwp | tail -n +2 | awk '{ num_threads += $1 } END { print num_threads }'
+
+max number of threads : 
+    cat /proc/sys/kernel/threads-max
