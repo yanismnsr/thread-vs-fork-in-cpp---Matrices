@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
     time_t tic, tac;
 
-    /* Serializer simpleMultiplicationFile("simple.txt");
+    Serializer simpleMultiplicationFile("simple.txt");
 
     for (int i = 1; i <= 300; ++i) {
 
@@ -63,17 +63,19 @@ int main(int argc, char *argv[]) {
 
         sc.process(simpleFunc);
 
-    } */
+    }
 
     /* ******************************************************************** */
     // Threads before forks
-    Serializer threadFile("thread.txt");
+    /* Serializer threadFile("thread.txt");
 
     for (int i = 1; i <= 300; ++i) {
 
-        SharedCalculator sc (i, i);
+        //SharedCalculator sc (i, i);
 
         Matrix mat(i, i);
+
+        Matrix result(i, i);
 
         function <void (Matrix*)> funcThreads = [i, &mat, &threadFile] (Matrix* resultPtr) {
             long int tic = getTime();
@@ -82,9 +84,14 @@ int main(int argc, char *argv[]) {
             threadFile << i << ":" << tac - tic << endl;
         };
 
-        sc.process(funcThreads);
+        //sc.process(funcThreads);
 
-    }
+        long int tic = getTime();
+        Matrix::MultiplyWithThreads(mat, mat, &result);
+        long int tac = getTime();
+        threadFile << i << ":" << tac - tic << endl;
+
+    } */
 
     /* Serializer forkFile ("fork.txt");
 

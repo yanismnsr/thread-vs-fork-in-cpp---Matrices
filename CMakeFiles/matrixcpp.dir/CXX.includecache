@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
+/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/Matrix.h
 vector
 -
 iostream
@@ -18,7 +18,7 @@ mutex
 condition_variable
 -
 
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Serializer.h
+/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/Serializer.h
 string
 -
 iostream
@@ -26,21 +26,45 @@ iostream
 fstream
 -
 
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/SharedCalculator.h
+/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/SharedCalculator.h
 iostream
 -
 functional
 -
 Matrix.h
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
+/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/Matrix.h
 
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/src/main.cpp
+/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/src/Matrix.cpp
 ../include/matrixcpp/Matrix.h
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Matrix.h
+/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/Matrix.h
+vector
+-
+thread
+-
+sys/wait.h
+-
+sys/mman.h
+-
+unistd.h
+-
+string.h
+-
+cstdlib
+-
+mutex
+-
+condition_variable
+-
+atomic
+-
+
+/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/src/main.cpp
+../include/matrixcpp/Matrix.h
+/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/Matrix.h
 ../include/matrixcpp/SharedCalculator.h
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/SharedCalculator.h
+/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/SharedCalculator.h
 ../include/matrixcpp/Serializer.h
-/mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/include/matrixcpp/Serializer.h
+/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/include/matrixcpp/Serializer.h
 vector
 -
 iostream

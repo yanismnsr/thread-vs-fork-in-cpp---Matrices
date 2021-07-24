@@ -170,7 +170,7 @@ void Matrix::lineTimesColumnThreads(
     const Matrix * mat2,
     uint line,
     uint column,
-    int threadNumber
+    uint threadNumber
 ){
 
     /* {
@@ -212,12 +212,17 @@ void Matrix::MultiplyWithThreads(
 
     solution->_nbProcesses = mat1Lines * mat2Columns;
 
-    for (int i = 0; i < mat1Lines; ++i)
+    uint val = -1;
+    uint max = 0;
+
+    for (uint i = 0; i < mat1Lines; ++i)
     {
-        for (int j = 0; j < mat2Columns; ++j)
+        for (uint j = 0; j < mat2Columns; ++j)
         {
-            int index = mat2Columns * i + j;
-            thread *t = new thread(
+            uint index = mat2Columns * i + j;
+            cout << "creating thread number " << index << endl;
+            cout << "running threads : " << (index - ((mat1Lines * mat2Columns) - solution->_nbProcesses)) << endl;
+            threadTable[index]  = new thread(
                 &Matrix::lineTimesColumnThreads,
                 solution,
                 &matrix1, 
@@ -226,9 +231,17 @@ void Matrix::MultiplyWithThreads(
                 j,
                 mat2Columns * i + j
             );
-            threadTable[index] = t;
+            cout << "Created " << index << endl;
+            if ((index + 1 - ((mat1Lines * mat2Columns) - solution->_nbProcesses)) > max) {
+                max = index - ((mat1Lines * mat2Columns) - solution->_nbProcesses);
+            }
+            //cout << "running threads : " << (index + 1 - ((mat1Lines * mat2Columns) - solution->_nbProcesses)) << endl;
+            
         }
     }
+
+    cout << "size : " << mat1Lines << endl;
+    cout << "max running threads : " << max << endl;
 
     // Synchronization 
     {
@@ -239,12 +252,7 @@ void Matrix::MultiplyWithThreads(
     // Detaching
     for (int i = 0; i < mat1Lines * mat2Columns; ++i)
     {
-        threadTable[i]->detach();
-    }
-
-    // Deleting the allocated memory for threads
-    for (int i = 0; i < mat1Lines * mat2Columns; ++i)
-    {
+        threadTable[i]->join();
         delete threadTable[i];
     }
 
@@ -262,7 +270,6 @@ ostream &operator<<(ostream &out, const Matrix &matrix)
     }
     return out;
 }
-
 
 void Matrix::MultiplyWithForks(
     const Matrix &matrix1,

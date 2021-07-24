@@ -55,7 +55,7 @@ public :
         const Matrix * mat2,
         uint line,
         uint column,
-        int threadNumber
+        uint threadNumber
     );
 
     static void naiveMultiplication (
