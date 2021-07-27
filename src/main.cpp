@@ -24,6 +24,8 @@ template <class T> void printType(const T&) {
     cout << __PRETTY_FUNCTION__ << endl;
 }
 
+
+
 /**
  * Returns the current time since epoch in ms 
  * @return The current time since epoch in ms 
@@ -34,6 +36,8 @@ long int getTime() {
     long int ms = tp.tv_sec * 1000 + tp.tv_usec / 1000;
     return ms;
 }
+
+
 
 /**
  * Performs a bench mark for the following cases 
