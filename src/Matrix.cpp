@@ -13,6 +13,8 @@
 #include <mutex>
 #include <condition_variable>
 #include <atomic>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
@@ -147,117 +149,6 @@ uint Matrix::GetNbColumns() const {
     return this->_columns;
 }
 
-void Matrix::lineTimesColumnPointers(
-    Matrix *solutionMatrix,
-    const Matrix * mat1,
-    const Matrix * mat2,
-    const uint line,
-    const uint column
-){
-    uint mat2Columns = mat2->GetNbColumns();
-    uint mat1Lines = mat1->GetNbLines();
-    float sum = 0;
-    for (uint i = 0; i < mat2Columns; ++i)
-    {
-        sum += mat1->_elementsMatrix[line][i]*mat2->_elementsMatrix[i][column];
-    }
-    solutionMatrix->_elementsMatrix[line][column] = sum;
-}
-
-void Matrix::lineTimesColumnThreads(
-    Matrix *solutionMatrix,
-    const Matrix * mat1,
-    const Matrix * mat2,
-    uint line,
-    uint column,
-    uint threadNumber
-){
-
-    /* {
-        lock_guard<mutex> lk(solutionMatrix->_mt);
-        solutionMatrix->_nbProcesses ++;
-    } */
-
-    uint mat2Columns = mat2->GetNbColumns();
-    uint mat1Lines = mat1->GetNbLines();
-    float sum = 0;
-    for (uint i = 0; i < mat2Columns; ++i)
-    {
-        sum += mat1->_elementsMatrix[line][i]*mat2->_elementsMatrix[i][column];
-    }
-    solutionMatrix->_elementsMatrix[line][column] = sum;
-
-    {
-        lock_guard<mutex> lk(solutionMatrix->_mt);
-        solutionMatrix->_nbProcesses --;
-        solutionMatrix->cv.notify_all();
-    }
-}
-
-void Matrix::MultiplyWithThreads(
-    const Matrix & matrix1,
-    const Matrix & matrix2,
-    Matrix * solution
-){
-    uint mat1Lines = matrix1.GetNbLines();
-    uint mat1Columns = matrix1.GetNbColumns();
-    uint mat2Lines = matrix2.GetNbLines();
-    uint mat2Columns = matrix2.GetNbColumns();
-    if (mat1Columns != mat2Lines)
-    {
-        throw "Incompatible sizes";
-    }
-
-    thread *threadTable[mat1Lines * mat2Columns];
-
-    solution->_nbProcesses = mat1Lines * mat2Columns;
-
-    uint val = -1;
-    uint max = 0;
-
-    for (uint i = 0; i < mat1Lines; ++i)
-    {
-        for (uint j = 0; j < mat2Columns; ++j)
-        {
-            uint index = mat2Columns * i + j;
-            cout << "creating thread number " << index << endl;
-            cout << "running threads : " << (index - ((mat1Lines * mat2Columns) - solution->_nbProcesses)) << endl;
-            threadTable[index]  = new thread(
-                &Matrix::lineTimesColumnThreads,
-                solution,
-                &matrix1, 
-                &matrix2, 
-                i,
-                j,
-                mat2Columns * i + j
-            );
-            cout << "Created " << index << endl;
-            if ((index + 1 - ((mat1Lines * mat2Columns) - solution->_nbProcesses)) > max) {
-                max = index - ((mat1Lines * mat2Columns) - solution->_nbProcesses);
-            }
-            //cout << "running threads : " << (index + 1 - ((mat1Lines * mat2Columns) - solution->_nbProcesses)) << endl;
-            
-        }
-    }
-
-    cout << "size : " << mat1Lines << endl;
-    cout << "max running threads : " << max << endl;
-
-    // Synchronization 
-    {
-        unique_lock<mutex> lk(solution->_mt);
-        solution->cv.wait(lk, [&solution]{ return solution->_nbProcesses == 0; });
-    }
-
-    // Detaching
-    for (int i = 0; i < mat1Lines * mat2Columns; ++i)
-    {
-        threadTable[i]->join();
-        delete threadTable[i];
-    }
-
-}
-
 ostream &operator<<(ostream &out, const Matrix &matrix)
 {
     for (int i = 0; i < matrix._lines; ++i)
@@ -271,45 +162,8 @@ ostream &operator<<(ostream &out, const Matrix &matrix)
     return out;
 }
 
-void Matrix::MultiplyWithForks(
-    const Matrix &matrix1,
-    const Matrix &matrix2,
-    Matrix * solution
-) {
-    uint mat1Lines = matrix1._lines;
-    uint mat1Columns = matrix1._columns;
-    uint mat2Lines = matrix2._lines;
-    uint mat2Columns = matrix2._columns;
-    pid_t pid;
 
-    if (mat1Columns != mat2Lines)
-    {
-        throw "Incompatible sizes";
-    }
-
-    for (int i = 0; i < mat1Lines; ++i) {
-        for (int j = 0; j < mat2Columns; ++j) {
-            pid = fork();
-            if (pid == 0) {
-                lineTimesColumnPointers(
-                    solution,
-                    &matrix1,
-                    &matrix2,
-                    i,
-                    j
-                );
-                exit(0);
-            }
-        }
-    }
-
-    if (pid != 0) {
-        while (wait(NULL) > 0); 
-    }
-
-}
-
-void Matrix::naiveMultiplication (
+void Matrix::MultiplyInMainThread (
     const Matrix & mat1, 
     const Matrix & mat2,
     Matrix* solution
@@ -332,4 +186,160 @@ void Matrix::naiveMultiplication (
     }
 
     cout << "operations : " << operations << endl;
+}
+
+
+void Matrix::MultiplyUsingThreads(
+    const unsigned int & nbThreads, 
+    const Matrix & matrix1,
+    const Matrix & matrix2, 
+    Matrix * solution
+) {
+    // Get the number of elements for each thread
+    unsigned int matrix1Lines = matrix1._lines;
+    unsigned int matrix1Columns = matrix1._columns;
+    unsigned int matrix2Lines = matrix2._lines;
+    unsigned int matrix2Columns = matrix1._lines;
+
+    unsigned int nbElements = matrix1Lines * matrix2Columns;
+
+    // security
+    int _nbThreads = nbThreads;
+    if (nbThreads > nbElements) {
+        _nbThreads = 1;
+    } 
+
+    limits thresholds [_nbThreads];
+
+    int elementsPerThread = nbElements / _nbThreads;
+    for (int i = 0; i < _nbThreads; ++i) {
+        thresholds[i].lower = i * elementsPerThread;
+        thresholds[i].upper = (i + 1) * elementsPerThread - 1;
+    }
+    thresholds[_nbThreads - 1].upper = nbElements - 1;
+
+    thread *threadTable[_nbThreads];
+    solution->_nbProcesses = _nbThreads;
+
+    for (int i = 0; i < _nbThreads; ++i) {
+        threadTable[i] = new thread (
+            &Matrix::threadMultiplicationWorker,
+            ref(matrix1),
+            ref(matrix2),
+            solution,
+            ref(thresholds[i])
+        );
+        threadTable[i]->detach();
+    }
+
+    // Barrier synchronization
+    {
+        unique_lock <mutex> lock (solution->_mt);
+        solution->cv.wait(lock, [&solution] {return solution->_nbProcesses == 0;});
+    }
+
+    // No need to join, just free the ressources 
+    for (int i = 0; i < _nbThreads; ++i) {
+        delete threadTable[i];
+    }
+
+}
+
+void Matrix::threadMultiplicationWorker(
+    const Matrix & mat1,
+    const Matrix & mat2, 
+    Matrix * resultMatrix,
+    const limits & thresholds
+) {
+
+    Matrix::multiplyElements(
+        mat1,
+        mat2,
+        resultMatrix,
+        thresholds
+    );
+
+    // Notify the main thread to check if all the threads have finished the job
+    {
+        lock_guard<mutex> lock(resultMatrix->_mt);
+        --resultMatrix->_nbProcesses;
+        resultMatrix->cv.notify_one();
+    }
+
+}
+
+void Matrix::multiplyElements(
+    const Matrix & mat1,
+    const Matrix & mat2, 
+    Matrix * resultMatrix,
+    const limits & thresholds
+) {
+    int lower = thresholds.lower;
+    int upper = thresholds.upper;
+
+    int nbLines = resultMatrix->_lines;
+    int nbColumns = resultMatrix->_columns;
+
+
+    for (int i = lower; i <= upper; ++i) {
+        int line = i / nbColumns;
+        int column = i % nbColumns;
+        resultMatrix->_elementsMatrix[line][column] = 0;
+        for (int j = 0; j < mat1._columns; ++j) {
+            resultMatrix->_elementsMatrix[line][column] += 
+                mat1._elementsMatrix[line][j]*mat2._elementsMatrix[j][column];
+        }
+    }
+}
+
+void Matrix::multiplyUsingForks(
+    const int & nbThreads, 
+    const Matrix & matrix1,
+    const Matrix & matrix2, 
+    Matrix * solution
+) {
+
+    // Get the number of elements for each thread
+    unsigned int matrix1Lines = matrix1._lines;
+    unsigned int matrix1Columns = matrix1._columns;
+    unsigned int matrix2Lines = matrix2._lines;
+    unsigned int matrix2Columns = matrix1._lines;
+
+    unsigned int nbElements = matrix1Lines * matrix2Columns;
+
+    pid_t pid;
+
+    // security
+    int _nbThreads = nbThreads;
+    if (nbThreads > nbElements) {
+        _nbThreads = 1;
+    } 
+
+    limits thresholds [_nbThreads];
+
+    int elementsPerThread = nbElements / _nbThreads;
+    for (int i = 0; i < _nbThreads; ++i) {
+        thresholds[i].lower = i * elementsPerThread;
+        thresholds[i].upper = (i + 1) * elementsPerThread - 1;
+    }
+    thresholds[_nbThreads - 1].upper = nbElements - 1;
+
+    for (int i = 0; i < _nbThreads; ++i) {
+        pid = fork();
+        if (pid == 0) {
+            multiplyElements(
+                matrix1,
+                matrix2, 
+                solution,
+                thresholds[i]
+            );
+            exit(0);
+        }
+    }
+
+    // Synchronization 
+    if (pid != 0) {
+        while (wait(NULL) > 0);
+    }
+
 }
