@@ -1,17 +1,20 @@
-
-# Consider dependencies only in project.
-set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
-
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
+  "CXX"
   )
+# The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices/src/Matrix.cpp" "/home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices/CMakeFiles/matrixcpp.dir/src/Matrix.cpp.o"
+  "/home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices/src/Serializer.cpp" "/home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices/CMakeFiles/matrixcpp.dir/src/Serializer.cpp.o"
+  "/home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices/src/SharedCalculator.cpp" "/home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices/CMakeFiles/matrixcpp.dir/src/SharedCalculator.cpp.o"
+  "/home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices/src/main.cpp" "/home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices/CMakeFiles/matrixcpp.dir/src/main.cpp.o"
+  )
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
-# The set of dependency files which are needed:
-set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/src/Matrix.cpp" "CMakeFiles/matrixcpp.dir/src/Matrix.cpp.o" "gcc" "CMakeFiles/matrixcpp.dir/src/Matrix.cpp.o.d"
-  "/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/src/Serializer.cpp" "CMakeFiles/matrixcpp.dir/src/Serializer.cpp.o" "gcc" "CMakeFiles/matrixcpp.dir/src/Serializer.cpp.o.d"
-  "/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/src/SharedCalculator.cpp" "CMakeFiles/matrixcpp.dir/src/SharedCalculator.cpp.o" "gcc" "CMakeFiles/matrixcpp.dir/src/SharedCalculator.cpp.o.d"
-  "/home/yanis/Desktop/Projets/thread-vs-fork-in-cpp---Matrices/src/main.cpp" "CMakeFiles/matrixcpp.dir/src/main.cpp.o" "gcc" "CMakeFiles/matrixcpp.dir/src/main.cpp.o.d"
+# The include file search paths:
+set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "include"
+  "include/matrixcpp"
   )
 
 # Targets to which this target links.
