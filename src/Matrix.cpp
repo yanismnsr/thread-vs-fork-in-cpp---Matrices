@@ -238,7 +238,7 @@ void Matrix::MultiplyUsingThreads(
         solution->cv.wait(lock, [&solution] {return solution->_nbProcesses == 0;});
     }
 
-    // No need to join, just free the ressources 
+    // No need to join detached threads, just free the ressources 
     for (int i = 0; i < _nbThreads; ++i) {
         delete threadTable[i];
     }
@@ -315,8 +315,8 @@ void Matrix::multiplyUsingForks(
         _nbThreads = 1;
     } 
 
+    // Get the interval of values to calculate by each process
     limits thresholds [_nbThreads];
-
     int elementsPerThread = nbElements / _nbThreads;
     for (int i = 0; i < _nbThreads; ++i) {
         thresholds[i].lower = i * elementsPerThread;
@@ -324,6 +324,7 @@ void Matrix::multiplyUsingForks(
     }
     thresholds[_nbThreads - 1].upper = nbElements - 1;
 
+    // Creating the processes
     for (int i = 0; i < _nbThreads; ++i) {
         pid = fork();
         if (pid == 0) {
