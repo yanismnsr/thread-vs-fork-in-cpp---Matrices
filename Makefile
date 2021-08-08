@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp
+CMAKE_SOURCE_DIR = /home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp
+CMAKE_BINARY_DIR = /home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/CMakeFiles /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices/CMakeFiles /home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/manso/Desktop/Personnel/Projets/matrixcpp/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nassim/Desktop/yanis/thread-vs-fork-in-cpp---Matrices/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,65 +123,113 @@ matrixcpp/fast:
 	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/build
 .PHONY : matrixcpp/fast
 
-# target to build an object file
-src/Matrix.o:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Matrix.o
+src/Matrix.o: src/Matrix.cpp.o
+
 .PHONY : src/Matrix.o
 
-# target to preprocess a source file
-src/Matrix.i:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Matrix.i
+# target to build an object file
+src/Matrix.cpp.o:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Matrix.cpp.o
+.PHONY : src/Matrix.cpp.o
+
+src/Matrix.i: src/Matrix.cpp.i
+
 .PHONY : src/Matrix.i
 
-# target to generate assembly for a file
-src/Matrix.s:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Matrix.s
+# target to preprocess a source file
+src/Matrix.cpp.i:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Matrix.cpp.i
+.PHONY : src/Matrix.cpp.i
+
+src/Matrix.s: src/Matrix.cpp.s
+
 .PHONY : src/Matrix.s
 
-# target to build an object file
-src/Serializer.o:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Serializer.o
+# target to generate assembly for a file
+src/Matrix.cpp.s:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Matrix.cpp.s
+.PHONY : src/Matrix.cpp.s
+
+src/Serializer.o: src/Serializer.cpp.o
+
 .PHONY : src/Serializer.o
 
-# target to preprocess a source file
-src/Serializer.i:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Serializer.i
+# target to build an object file
+src/Serializer.cpp.o:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Serializer.cpp.o
+.PHONY : src/Serializer.cpp.o
+
+src/Serializer.i: src/Serializer.cpp.i
+
 .PHONY : src/Serializer.i
 
-# target to generate assembly for a file
-src/Serializer.s:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Serializer.s
+# target to preprocess a source file
+src/Serializer.cpp.i:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Serializer.cpp.i
+.PHONY : src/Serializer.cpp.i
+
+src/Serializer.s: src/Serializer.cpp.s
+
 .PHONY : src/Serializer.s
 
-# target to build an object file
-src/SharedCalculator.o:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/SharedCalculator.o
+# target to generate assembly for a file
+src/Serializer.cpp.s:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/Serializer.cpp.s
+.PHONY : src/Serializer.cpp.s
+
+src/SharedCalculator.o: src/SharedCalculator.cpp.o
+
 .PHONY : src/SharedCalculator.o
 
-# target to preprocess a source file
-src/SharedCalculator.i:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/SharedCalculator.i
+# target to build an object file
+src/SharedCalculator.cpp.o:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/SharedCalculator.cpp.o
+.PHONY : src/SharedCalculator.cpp.o
+
+src/SharedCalculator.i: src/SharedCalculator.cpp.i
+
 .PHONY : src/SharedCalculator.i
 
-# target to generate assembly for a file
-src/SharedCalculator.s:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/SharedCalculator.s
+# target to preprocess a source file
+src/SharedCalculator.cpp.i:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/SharedCalculator.cpp.i
+.PHONY : src/SharedCalculator.cpp.i
+
+src/SharedCalculator.s: src/SharedCalculator.cpp.s
+
 .PHONY : src/SharedCalculator.s
 
-# target to build an object file
-src/main.o:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/main.o
+# target to generate assembly for a file
+src/SharedCalculator.cpp.s:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/SharedCalculator.cpp.s
+.PHONY : src/SharedCalculator.cpp.s
+
+src/main.o: src/main.cpp.o
+
 .PHONY : src/main.o
 
-# target to preprocess a source file
-src/main.i:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/main.i
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+
 .PHONY : src/main.i
 
-# target to generate assembly for a file
-src/main.s:
-	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/main.s
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+
 .PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/matrixcpp.dir/build.make CMakeFiles/matrixcpp.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:

@@ -41,7 +41,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-3.16/Modules/CMakeTestCompilerCommon.cmake"
   "/usr/share/cmake-3.16/Modules/CMakeUnixFindMake.cmake"
   "/usr/share/cmake-3.16/Modules/CheckCSourceCompiles.cmake"
-  "/usr/share/cmake-3.16/Modules/CheckFunctionExists.c"
+  "/usr/share/cmake-3.16/Modules/CheckForPthreads.c"
   "/usr/share/cmake-3.16/Modules/CheckIncludeFile.c.in"
   "/usr/share/cmake-3.16/Modules/CheckIncludeFile.cmake"
   "/usr/share/cmake-3.16/Modules/CheckLibraryExists.cmake"

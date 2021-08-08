@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/matrixcpp.dir/src/Matrix.o"
-  "CMakeFiles/matrixcpp.dir/src/Serializer.o"
-  "CMakeFiles/matrixcpp.dir/src/SharedCalculator.o"
-  "CMakeFiles/matrixcpp.dir/src/main.o"
+  "CMakeFiles/matrixcpp.dir/src/Matrix.cpp.o"
+  "CMakeFiles/matrixcpp.dir/src/Serializer.cpp.o"
+  "CMakeFiles/matrixcpp.dir/src/SharedCalculator.cpp.o"
+  "CMakeFiles/matrixcpp.dir/src/main.cpp.o"
   "matrixcpp"
   "matrixcpp.pdb"
 )

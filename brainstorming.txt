@@ -35,3 +35,8 @@ Check how many processes are running :
 
 max number of threads : 
     cat /proc/sys/kernel/threads-max
+        The result in ubuntu : 125749
+
+
+
+Finally, the article will talk about matrix multiplication benchmarks, threads - forks
